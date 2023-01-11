@@ -1,15 +1,13 @@
 import java.util.Objects;
 
-public abstract class  Transport {
+public abstract class  Transport<T extends Driver> implements Competing {
 
     private final String brand;
     private final String model;
-    private final Integer year;
-    private final String country;
-    private String color;
-    private Integer maxSpeed;
+    private Double engineVolume;
+    private T driver;
 
-    public Transport(String brand, String model, Integer year, String country, String color, Integer maxSpeed) {
+    public Transport(String brand, String model, Double engineVolume,T driver) {
         if (brand == null || brand.isEmpty()) {
             this.brand = "default brand";
         } else {
@@ -21,24 +19,17 @@ public abstract class  Transport {
         } else {
             this.model = model;
         }
+        setEngineVolume(engineVolume);
+        setDriver(driver);
 
-        this.year = Math.abs(year);
-        if (country == null || country.isEmpty()) {
-            this.country = "default country";
-        } else {
-            this.country = country;
-        }
+    }
 
-        if (color == null || color.isEmpty()) {
-            this.color = "default color";
-        }
-        this.color = color;
+    public T getDriver() {
+        return driver;
+    }
 
-        if (maxSpeed == 0) {
-            this.maxSpeed = 1;
-        } else {
-            this.maxSpeed = maxSpeed;
-        }
+    public void setDriver(T driver) {
+        this.driver = driver;
     }
 
     public String getBrand() {
@@ -49,61 +40,56 @@ public abstract class  Transport {
         return model;
     }
 
-    public Integer getYear() {
-        return year;
+    public Double getEngineVolume() {
+        return engineVolume;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public Integer getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void  setColor(String color) {
-        {
-            if (color == null || color.isEmpty()) {
-                this.color = "без цвета";
-            } else {
-                this.color = color;
-            }
-        }
-    }
-
-    public void setMaxSpeed(Integer maxSpeed) {
-        if (maxSpeed == 0) {
-            this.maxSpeed = 1;
+    public void setEngineVolume(Double engineVolume ) {
+        if (engineVolume <= 0) {
+            this.engineVolume = 1.5;
         } else {
-            this.maxSpeed = Math.abs(maxSpeed);
+            this.engineVolume = engineVolume;
         }
     }
+
+
+
 
 
 
     @Override
     public String toString() {
         return ": " + brand + " " + model +
-                ",год выпуска: " + year +
-                ", страна производства: " + country +
-                ", цвет: " + color +
-                ", максимальная скорость: " + maxSpeed;
+       ", мощность двигателя "+ engineVolume ;
     }
+    public abstract String startMoving();
 
+    public abstract String endMoving();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transport transport = (Transport) o;
-        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(year, transport.year) && Objects.equals(country, transport.country) && Objects.equals(color, transport.color) && Objects.equals(maxSpeed, transport.maxSpeed);
+        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model)&& Objects.equals(engineVolume,transport.engineVolume) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model, year, country, color, maxSpeed);
+        return Objects.hash(brand, model, engineVolume);
+    }
+
+    @Override
+    public void getPitStop() {
+        System.out.println("Пит стоп для "+getBrand()+" "+getModel());
+    }
+
+    @Override
+    public Double getBestLapTime() {
+        return ( getMaxSpeed()*1000);
+    }
+
+    @Override
+    public Double  getMaxSpeed() {
+        return getEngineVolume()*50;
     }
 }
