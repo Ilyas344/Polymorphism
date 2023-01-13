@@ -14,6 +14,7 @@ public abstract class Transport<T extends Driver> implements Competing {
             this.brand = brand;
         }
 
+
         if (model == null || model.isEmpty()) {
             this.model = "default model";
         } else {
@@ -50,6 +51,9 @@ public abstract class Transport<T extends Driver> implements Competing {
         } else {
             this.engineVolume = engineVolume;
         }
+    }
+
+    public void printType(String cap) {
     }
 
 
