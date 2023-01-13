@@ -1,4 +1,4 @@
-public class DriverD  extends Driver{
+public class DriverD extends Driver {
 
 
     public DriverD(String fullName, boolean isDriversLicense, Integer experience) {
@@ -7,7 +7,7 @@ public class DriverD  extends Driver{
 
     @Override
     public void startMoving() {
-        System.out.println("Водитель категории D "+getFullName()+" начал движение ");
+        System.out.println("Водитель категории D " + getFullName() + " начал движение ");
     }
 
     @Override
@@ -17,6 +17,6 @@ public class DriverD  extends Driver{
 
     @Override
     public void refuel() {
-        System.out.println("Водитель "+getFullName()+" заправляет машину");
+        System.out.println("Водитель " + getFullName() + " заправляет машину");
     }
 }

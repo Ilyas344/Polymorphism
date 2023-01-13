@@ -1,7 +1,7 @@
 
 import java.util.Objects;
 
-public class Car  extends Transport <DriverB > {
+public class Car extends Transport<DriverB> {
 
 
     public Car(String brand, String model, Double engineVolume, DriverB driver) {
@@ -21,7 +21,7 @@ public class Car  extends Transport <DriverB > {
     @Override
     public String toString() {
 
-        return "Автомобиль "+super.toString();
+        return "Автомобиль " + super.toString();
 
     }
 
@@ -29,7 +29,6 @@ public class Car  extends Transport <DriverB > {
     public int hashCode() {
         return Objects.hash(super.hashCode());
     }
-
 
 
 }

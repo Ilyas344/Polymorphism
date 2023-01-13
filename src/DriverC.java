@@ -1,11 +1,11 @@
-public class DriverC extends Driver{
+public class DriverC extends Driver {
     public DriverC(String fullName, boolean isDriversLicense, Integer experience) {
         super(fullName, isDriversLicense, experience);
     }
 
     @Override
     public void startMoving() {
-        System.out.println("Водитель категории С "+getFullName()+" начал движение ");
+        System.out.println("Водитель категории С " + getFullName() + " начал движение ");
     }
 
     @Override
@@ -15,6 +15,6 @@ public class DriverC extends Driver{
 
     @Override
     public void refuel() {
-        System.out.println("Водитель "+getFullName()+" заправляет машину");
+        System.out.println("Водитель " + getFullName() + " заправляет машину");
     }
 }

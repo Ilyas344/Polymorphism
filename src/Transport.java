@@ -1,13 +1,13 @@
 import java.util.Objects;
 
-public abstract class  Transport<T extends Driver> implements Competing {
+public abstract class Transport<T extends Driver> implements Competing {
 
     private final String brand;
     private final String model;
     private Double engineVolume;
     private T driver;
 
-    public Transport(String brand, String model, Double engineVolume,T driver) {
+    public Transport(String brand, String model, Double engineVolume, T driver) {
         if (brand == null || brand.isEmpty()) {
             this.brand = "default brand";
         } else {
@@ -44,7 +44,7 @@ public abstract class  Transport<T extends Driver> implements Competing {
         return engineVolume;
     }
 
-    public void setEngineVolume(Double engineVolume ) {
+    public void setEngineVolume(Double engineVolume) {
         if (engineVolume <= 0) {
             this.engineVolume = 1.5;
         } else {
@@ -53,24 +53,22 @@ public abstract class  Transport<T extends Driver> implements Competing {
     }
 
 
-
-
-
-
     @Override
     public String toString() {
         return ": " + brand + " " + model +
-       ", мощность двигателя "+ engineVolume ;
+                ", мощность двигателя " + engineVolume;
     }
+
     public abstract String startMoving();
 
     public abstract String endMoving();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transport transport = (Transport) o;
-        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model)&& Objects.equals(engineVolume,transport.engineVolume) ;
+        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(engineVolume, transport.engineVolume);
     }
 
     @Override
@@ -80,16 +78,16 @@ public abstract class  Transport<T extends Driver> implements Competing {
 
     @Override
     public void getPitStop() {
-        System.out.println("Пит стоп для "+getBrand()+" "+getModel());
+        System.out.println("Пит стоп для " + getBrand() + " " + getModel());
     }
 
     @Override
     public Double getBestLapTime() {
-        return ( getMaxSpeed()*1000);
+        return (getMaxSpeed() * 1000);
     }
 
     @Override
-    public Double  getMaxSpeed() {
-        return getEngineVolume()*50;
+    public Double getMaxSpeed() {
+        return getEngineVolume() * 50;
     }
 }

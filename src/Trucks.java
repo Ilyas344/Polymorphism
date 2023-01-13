@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Trucks extends Transport< DriverC >{
+public class Trucks extends Transport<DriverC> {
     public Trucks(String brand, String model, Double engineVolume, DriverC driver) {
         super(brand, model, engineVolume, driver);
     }
@@ -18,7 +18,7 @@ public class Trucks extends Transport< DriverC >{
     @Override
     public String toString() {
 
-        return "Грузовой автомобиль "+super.toString();
+        return "Грузовой автомобиль " + super.toString();
 
     }
 

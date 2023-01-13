@@ -1,4 +1,4 @@
-public abstract class Driver  {
+public abstract class Driver {
     private String fullName;
     private boolean isDriversLicense;
     private Integer experience;
@@ -37,7 +37,8 @@ public abstract class Driver  {
     public abstract void startMoving();
 
 
-    public abstract void  endMoving();
+    public abstract void endMoving();
+
     public abstract void refuel();
 
     @Override
