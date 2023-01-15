@@ -2,6 +2,7 @@
 import java.util.Objects;
 
 public class Car extends Transport<DriverB> {
+    BodyType bodyType;
 
     public enum BodyType {
         SEDAN("Седан"),
@@ -32,6 +33,7 @@ public class Car extends Transport<DriverB> {
 
     public Car(String brand, String model, Double engineVolume, DriverB driver, BodyType bodyType) {
         super(brand, model, engineVolume, driver);
+        this.bodyType = bodyType;
     }
 
 
@@ -47,45 +49,19 @@ public class Car extends Transport<DriverB> {
 
 
     @Override
-    public void printType(String bodyType) {
-        switch (Car.BodyType.valueOf(bodyType)) {
-            case SEDAN:
-                System.out.println(BodyType.SEDAN);
-                break;
-            case HATCHBACK:
-                System.out.println(BodyType.HATCHBACK);
-                break;
-            case STATION_WAGON:
-                System.out.println(BodyType.STATION_WAGON);
-                break;
-            case VAN:
-                System.out.println(BodyType.VAN);
-                break;
-            case MINIVAN:
-                System.out.println(BodyType.MINIVAN);
-                break;
-            case PICKUP:
-                System.out.println(BodyType.PICKUP);
-                break;
-            case CROSSOVER:
-                System.out.println(BodyType.CROSSOVER);
-                break;
-            case COUPE:
-                System.out.println(BodyType.COUPE);
-                break;
-            case SUV:
-                System.out.println(BodyType.SUV);
-                break;
-            default:
-                System.out.println("Данных по транспортному средству недостаточно");
-                break;
-
+    public void printType() {
+        if (bodyType.toString().isEmpty()) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println("Легковой автомобиль " + getBrand() + bodyType);
         }
+
+
     }
 
     @Override
     public String toString() {
-        return "Автомобиль " + super.toString();
+        return "Автомобиль " + super.toString() + bodyType.toString();
 
     }
 

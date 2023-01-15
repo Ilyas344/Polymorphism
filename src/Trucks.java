@@ -1,19 +1,19 @@
 import java.util.Objects;
 
 public class Trucks extends Transport<DriverC> {
+    Payload payload;
+
     public enum Payload {
-        N1(0, 3.5f),
-        N2(3.5f, 12),
-        N3(12, Float.MAX_VALUE);
-
-        private final float n1 = (float) 3.5;
-        private final float n2 = (float) 12;
-
-        private final float m1;
-        private final float m2;
+        N1(null, 3.5f),
+        N2(3.5f, 12f),
+        N3(12f, null);
 
 
-        Payload(float m1, float m2) {
+        private final Float m1;
+        private final Float m2;
+
+
+        Payload(Float m1, Float m2) {
             this.m1 = m1;
             this.m2 = m2;
 
@@ -31,27 +31,21 @@ public class Trucks extends Transport<DriverC> {
 
         @Override
         public String toString() {
-            if (n2 == m1) {
-                return "Грузоподъемность: до " + n1 + " тонн";
+            if (m1 == null) {
+                return " грузоподъемность: до " + m2 + " тонн";
             }
-            if (n1 == m1) {
-                return "Грузоподъемность: от " + n1 + " тонн до " + n2 + " тонн";
+            if (m1 != null && m2 != null) {
+                return " грузоподъемность: от " + m1 + " тонн до " + m2 + " тонн";
             } else {
-                return "Грузоподъемность: от " + n2 + " тонн";
+                return " грузоподъемность: от " + m1 + " тонн";
             }
         }
 
-        public float getN1() {
-            return n1;
-        }
-
-        public float getN2() {
-            return n2;
-        }
     }
 
     public Trucks(String brand, String model, Double engineVolume, DriverC driver, Payload payload) {
         super(brand, model, engineVolume, driver);
+        this.payload = payload;
 
     }
 
@@ -66,21 +60,11 @@ public class Trucks extends Transport<DriverC> {
     }
 
     @Override
-    public void printType(String payload) {
-        switch (Trucks.Payload.valueOf(payload)) {
-            case N1:
-                System.out.println(Payload.N1);
-                break;
-            case N2:
-                System.out.println(Payload.N2);
-                break;
-            case N3:
-                System.out.println(Payload.N3);
-                break;
-            default:
-                System.out.println("Данных по транспортному средству недостаточно");
-                break;
-
+    public void printType() {
+        if (payload.toString().isEmpty()) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println("Грузовой автомобиль " + getBrand() + " " + payload);
         }
 
 
@@ -89,7 +73,7 @@ public class Trucks extends Transport<DriverC> {
     @Override
     public String toString() {
 
-        return "Грузовой автомобиль " + super.toString();
+        return "Грузовой автомобиль " + super.toString() + payload.toString();
 
     }
 

@@ -14,7 +14,7 @@ public class Main {
         System.out.println(hyundai);
         System.out.println();
         Bus paz = new Bus("ПАЗ", "3205", 5.0, driverD, Bus.Сapacity.ESPECIALLY_SMALL);
-        Bus maz = new Bus("МАЗ", "241", 4.0, driverD,Bus.Сapacity.SMALL);
+        Bus maz = new Bus("МАЗ", "241", 4.0, driverD, Bus.Сapacity.SMALL);
         Bus liaz = new Bus("ЛИАЗ", "677", 3.0, driverD, Bus.Сapacity.ESPECIALLY_LARGE);
         Bus liaz3 = new Bus("ЛИАЗ", "654", 3.0, driverD, Bus.Сapacity.AVERAGE);
         System.out.println(paz);
@@ -42,7 +42,15 @@ public class Main {
         printInfo(paz);
         printInfo(volvo);
         printInfo(audi);
-
+        paz.printType();
+        volvo.printType();
+        maz.printType();
+        volvo1.printType();
+        liaz.printType();
+        volvo2.printType();
+        liaz3.printType();
+        volvo3.printType();
+        audi.printType();
 
 
     }
