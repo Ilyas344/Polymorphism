@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Trucks extends Transport<DriverC> {
-   private Payload payload;
+    private Payload payload;
 
     public enum Payload {
         N1(null, 3.5f),
@@ -69,13 +69,21 @@ public class Trucks extends Transport<DriverC> {
 
     @Override
     public void printType() {
-        if (payload==null) {
+        if (payload == null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Грузовой автомобиль " + getBrand() + " " + payload);
         }
+    }
 
-
+    @Override
+    public void passDiagnostics() {
+        try {
+            System.out.println("Грузовой втомобиль " + getBrand() + " проходит диагностику");
+            System.out.println("Водитель " + getDriver().getFullName() + " автомобиля " + getBrand() + " имеет права своей категории");
+        } catch (CheckDriversException e) {
+            throw new NullPointerException("Необходимо указать тип прав");
+        }
     }
 
     @Override

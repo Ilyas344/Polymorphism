@@ -64,6 +64,14 @@ public class Bus extends Transport<DriverD> {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Bus bus = (Bus) o;
+        return capacity == bus.capacity;
+    }
 
     @Override
     public String toString() {
@@ -97,14 +105,28 @@ public class Bus extends Transport<DriverD> {
 
     @Override
     public void printType() {
-        if (capacity==null) {
+        if (capacity == null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Автобус " + getBrand() + " " + capacity);
         }
 
+    }
 
+    @Override
+    public void passDiagnostics() throws CheckDriversException {
+        try {
+            System.out.println("Водитель " + getDriver().getFullName() + " автобуса " + getBrand() + " имеет права своей категории");
+        } catch (CheckDriversException e) {
+            throw new NullPointerException("Водитель без прав");
+        } finally {
+            if (getClass() == Bus.class)
+                throw new RuntimeException("Автобусы диагностику проходить не могут");
+        }
     }
 }
+
+
+
 
 

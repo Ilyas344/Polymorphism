@@ -25,6 +25,12 @@ public abstract class Transport<T extends Driver> implements Competing {
 
     }
 
+    public Transport(String brand, String model, Double engineVolume) {
+        this.brand = brand;
+        this.model = model;
+        this.engineVolume = engineVolume;
+    }
+
     public T getDriver() {
         return driver;
     }
@@ -73,6 +79,9 @@ public abstract class Transport<T extends Driver> implements Competing {
         Transport transport = (Transport) o;
         return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(engineVolume, transport.engineVolume);
     }
+
+    public abstract void passDiagnostics() throws Exception;
+
 
     @Override
     public int hashCode() {

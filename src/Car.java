@@ -25,17 +25,23 @@ public class Car extends Transport<DriverB> {
             return bodyType;
         }
 
+
         @Override
         public String toString() {
             return " тип кузова " + getBodyType();
         }
     }
 
+
     public Car(String brand, String model, Double engineVolume, DriverB driver, BodyType bodyType) {
         super(brand, model, engineVolume, driver);
         this.bodyType = bodyType;
     }
 
+    public Car(String brand, String model, Double engineVolume, BodyType bodyType) {
+        super(brand, model, engineVolume);
+        this.bodyType = bodyType;
+    }
 
     @Override
     public String startMoving() {
@@ -57,7 +63,7 @@ public class Car extends Transport<DriverB> {
 
     @Override
     public void printType() {
-        if (bodyType==null) {
+        if (bodyType == null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Легковой автомобиль " + getBrand() + bodyType);
@@ -72,11 +78,18 @@ public class Car extends Transport<DriverB> {
 
     }
 
-
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode());
     }
 
-
+    @Override
+    public void passDiagnostics() {
+        try {
+            System.out.println("Автомобиль " + getBrand() + " проходит диагностику");
+            System.out.println("Водитель " + getDriver().getFullName() + " автомобиля " + getBrand() + " имеет права своей категории");
+        } catch (CheckDriversException e) {
+            throw new NullPointerException("Необходимо указать тип прав");
+        }
+    }
 }
