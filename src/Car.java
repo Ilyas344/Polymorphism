@@ -2,7 +2,7 @@
 import java.util.Objects;
 
 public class Car extends Transport<DriverB> {
-    BodyType bodyType;
+    private BodyType bodyType;
 
     public enum BodyType {
         SEDAN("Седан"),
@@ -47,10 +47,17 @@ public class Car extends Transport<DriverB> {
         return null;
     }
 
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(BodyType bodyType) {
+        this.bodyType = bodyType;
+    }
 
     @Override
     public void printType() {
-        if (bodyType.toString().isEmpty()) {
+        if (bodyType==null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Легковой автомобиль " + getBrand() + bodyType);

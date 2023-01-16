@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Trucks extends Transport<DriverC> {
-    Payload payload;
+   private Payload payload;
 
     public enum Payload {
         N1(null, 3.5f),
@@ -49,6 +49,14 @@ public class Trucks extends Transport<DriverC> {
 
     }
 
+    public Payload getPayload() {
+        return payload;
+    }
+
+    public void setPayload(Payload payload) {
+        this.payload = payload;
+    }
+
     @Override
     public String startMoving() {
         return null;
@@ -61,7 +69,7 @@ public class Trucks extends Transport<DriverC> {
 
     @Override
     public void printType() {
-        if (payload.toString().isEmpty()) {
+        if (payload==null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Грузовой автомобиль " + getBrand() + " " + payload);

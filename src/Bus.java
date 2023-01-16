@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Bus extends Transport<DriverD> {
-    Сapacity capacity;
+    private Сapacity capacity;
 
     enum Сapacity {
         ESPECIALLY_SMALL("особо малая", null, 10),
@@ -72,6 +72,14 @@ public class Bus extends Transport<DriverD> {
 
     }
 
+    public Сapacity getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Сapacity capacity) {
+        this.capacity = capacity;
+    }
+
     @Override
     public String startMoving() {
         return null;
@@ -89,7 +97,7 @@ public class Bus extends Transport<DriverD> {
 
     @Override
     public void printType() {
-        if (capacity.toString().isEmpty()) {
+        if (capacity==null) {
             System.out.println("Данных по транспортному средству недостаточно");
         } else {
             System.out.println("Автобус " + getBrand() + " " + capacity);
