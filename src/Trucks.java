@@ -77,13 +77,14 @@ public class Trucks extends Transport<DriverC> {
     }
 
     @Override
-    public void passDiagnostics() {
-        try {
-            System.out.println("Грузовой втомобиль " + getBrand() + " проходит диагностику");
+    public void passDiagnostics() throws CheckDriversException {
+        System.out.println("Грузовой втомобиль " + getBrand() + " проходит диагностику");
+        if (!getDriver().getIsDriversLicense()) {
+            throw new CheckDriversException("У водителя нет прав", this.getDriver());
+        } else {
             System.out.println("Водитель " + getDriver().getFullName() + " автомобиля " + getBrand() + " имеет права своей категории");
-        } catch (CheckDriversException e) {
-            throw new NullPointerException("Необходимо указать тип прав");
         }
+
     }
 
     @Override

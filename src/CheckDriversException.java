@@ -1,5 +1,6 @@
-public class CheckDriversException extends NullPointerException {
+public class CheckDriversException extends Exception {
     private final Driver driver;
+
 
     public CheckDriversException(String message, Driver driver) {
         super(message);

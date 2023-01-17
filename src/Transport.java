@@ -90,7 +90,7 @@ public abstract class Transport<T extends Driver> implements Competing {
         return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(engineVolume, transport.engineVolume);
     }
 
-    public abstract void passDiagnostics() throws Exception;
+    public abstract void passDiagnostics() throws CheckDriversException;
 
 
     @Override

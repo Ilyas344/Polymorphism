@@ -28,7 +28,7 @@ public abstract class Driver {
         this.fullName = fullName;
     }
 
-    public boolean isDriversLicense() {
+    public boolean getIsDriversLicense() {
         return isDriversLicense;
     }
 
@@ -56,9 +56,9 @@ public abstract class Driver {
     public String toString() {
         String licence;
         if (isDriversLicense) {
-            licence = ", с вод. правами,";
+            licence = ", с вод. правами";
         } else {
-            licence = ", без вод. прав,";
+            licence = ", без вод. прав";
         }
         return "Водитель: " +
                 fullName + licence +

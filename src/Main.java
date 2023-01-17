@@ -1,11 +1,11 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        DriverB driverB = new DriverB("Александр", true, 5);
+        DriverB driverB = new DriverB("Александр", false, 5);
         DriverC driverC = new DriverC("Алексей", true, 5);
         DriverD driverD = new DriverD("Валерий", true, 5);
 
         Car audi = new Car("Audi", "A8 50 L TDI quattro", (3.0), driverB, Car.BodyType.SEDAN);
-        Car bmw = new Car("BMW", "Z8", (3.0), Car.BodyType.VAN);
+        Car bmw = new Car("BMW", "Z8", (3.0), driverB, Car.BodyType.VAN);
         Car kia = new Car("Kia", "Sportage 4-го поколения", (2.4), driverB, Car.BodyType.MINIVAN);
         Car hyundai = new Car("Hyundai", "Santa Fe", 1.6, driverB, Car.BodyType.CROSSOVER);
 /*        System.out.println(audi);
@@ -51,19 +51,25 @@ public class Main {
         volvo2.printType();
         liaz3.printType();
         volvo3.printType();
-        audi.printType();
-        volvo.passDiagnostics();
-        audi.passDiagnostics();
-       // paz.passDiagnostics();
-       bmw.passDiagnostics();*/
-        mech.addFixedCar(paz);
+        audi.printType();*/
+        try {
+            volvo.passDiagnostics();
+            audi.passDiagnostics();
+            paz.passDiagnostics();
+            bmw.passDiagnostics();
+        } catch (CheckDriversException e) {
+            System.out.println("Произошла ошибка");
+            System.out.println(e.getMessage());
+        }
+
+    /*    mech.addFixedCar(paz);
         mech.addFixedCar(maz);
         mech.addFixedCar(liaz3);
         mech.addFixedCar(audi);
         mech.addFixedCar(hyundai);
         mech.addFixedCar(volvo2);
         mech.fixedCar();
-
+*/
 
     }
 

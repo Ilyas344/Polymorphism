@@ -115,16 +115,17 @@ public class Bus extends Transport<DriverD> {
 
     @Override
     public void passDiagnostics() throws CheckDriversException {
-        try {
-            System.out.println("Водитель " + getDriver().getFullName() + " автобуса " + getBrand() + " имеет права своей категории");
-        } catch (CheckDriversException e) {
-            throw new NullPointerException("Водитель без прав");
-        } finally {
-            if (getClass() == Bus.class)
-                throw new RuntimeException("Автобусы диагностику проходить не могут");
+        if (!getDriver().getIsDriversLicense()) {
+            throw new CheckDriversException("У водителя нет прав", this.getDriver());
+        } else {
+            System.out.println("Водитель " + getDriver().getFullName() + " автомобиля " + getBrand() + " имеет права своей категории");
         }
+        throw new RuntimeException("Автобусы диагностику проходить не могут");
     }
+
+
 }
+
 
 
 
