@@ -1,12 +1,23 @@
+import java.util.ArrayList;
+
 public abstract class Driver {
     private String fullName;
     private boolean isDriversLicense;
     private Integer experience;
+    private ArrayList<Driver> driverArrayList;
 
     public Driver(String fullName, boolean isDriversLicense, Integer experience) {
         this.fullName = fullName;
         this.isDriversLicense = isDriversLicense;
         this.experience = experience;
+    }
+
+    public ArrayList<Driver> getDriverArrayList() {
+        return driverArrayList;
+    }
+
+    public void setDriverArrayList(ArrayList<Driver> driverArrayListtArrayList) {
+        this.driverArrayList = driverArrayListtArrayList;
     }
 
     public String getFullName() {
@@ -43,10 +54,14 @@ public abstract class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "fullName='" + fullName + '\'' +
-                ", isDriversLicense=" + isDriversLicense +
-                ", experience=" + experience +
-                '}';
+        String licence;
+        if (isDriversLicense) {
+            licence = ", с вод. правами,";
+        } else {
+            licence = ", без вод. прав,";
+        }
+        return "Водитель: " +
+                fullName + licence +
+                ", опыт вождения: " + experience;
     }
 }
