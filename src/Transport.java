@@ -16,6 +16,7 @@ public abstract class Transport<T extends Driver> implements Competing {
             this.brand = "default brand";
         } else {
             this.brand = brand;
+            technicalServices=new ArrayList<>();
         }
 
 
