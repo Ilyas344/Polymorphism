@@ -4,7 +4,7 @@ public abstract class Driver {
     private String fullName;
     private boolean isDriversLicense;
     private Integer experience;
-    private ArrayList<Driver> driverArrayList;
+
 
     public Driver(String fullName, boolean isDriversLicense, Integer experience) {
         this.fullName = fullName;
@@ -12,13 +12,7 @@ public abstract class Driver {
         this.experience = experience;
     }
 
-    public ArrayList<Driver> getDriverArrayList() {
-        return driverArrayList;
-    }
 
-    public void setDriverArrayList(ArrayList<Driver> driverArrayListtArrayList) {
-        this.driverArrayList = driverArrayListtArrayList;
-    }
 
     public String getFullName() {
         return fullName;

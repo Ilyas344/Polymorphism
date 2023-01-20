@@ -8,7 +8,7 @@ public abstract class Transport<T extends Driver> implements Competing {
     private final String model;
     private Double engineVolume;
     private T driver;
-    private List <TechnicalService>technicalServices=new ArrayList<>();
+    private List <TechnicalService>technicalServices;
 
 
     public Transport(String brand, String model, Double engineVolume, T driver) {
