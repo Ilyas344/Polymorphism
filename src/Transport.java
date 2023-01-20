@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Transport<T extends Driver> implements Competing {
 
@@ -8,7 +6,8 @@ public abstract class Transport<T extends Driver> implements Competing {
     private final String model;
     private Double engineVolume;
     private T driver;
-    private List <TechnicalService>technicalServices;
+
+    private Map<HashSet<Transport>,HashSet<TechnicalService>> technicalServices;
 
 
     public Transport(String brand, String model, Double engineVolume, T driver) {
@@ -16,7 +15,7 @@ public abstract class Transport<T extends Driver> implements Competing {
             this.brand = "default brand";
         } else {
             this.brand = brand;
-            technicalServices=new ArrayList<>();
+            technicalServices=  new HashMap<>();
         }
 
 
@@ -65,11 +64,11 @@ public abstract class Transport<T extends Driver> implements Competing {
         }
     }
 
-    public List<TechnicalService> getTechnicalServices() {
+    public Map<HashSet<Transport>, HashSet<TechnicalService>> getTechnicalServices() {
         return technicalServices;
     }
 
-    public void setTechnicalServices(List<TechnicalService> technicalServices) {
+    public void setTechnicalServices(Map<HashSet<Transport>, HashSet<TechnicalService>> technicalServices) {
         this.technicalServices = technicalServices;
     }
 
@@ -116,5 +115,6 @@ public abstract class Transport<T extends Driver> implements Competing {
     public Double getMaxSpeed() {
         return getEngineVolume() * 50;
     }
+
 
 }
