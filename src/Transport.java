@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Transport<T extends Driver> implements Competing {
@@ -7,7 +8,8 @@ public abstract class Transport<T extends Driver> implements Competing {
     private final String model;
     private Double engineVolume;
     private T driver;
-    private ArrayList<Transport> transportArrayList;
+    private List <TechnicalService>technicalServices=new ArrayList<>();
+
 
     public Transport(String brand, String model, Double engineVolume, T driver) {
         if (brand == null || brand.isEmpty()) {
@@ -41,13 +43,6 @@ public abstract class Transport<T extends Driver> implements Competing {
         this.driver = driver;
     }
 
-    public ArrayList<Transport> getTransportArrayList() {
-        return transportArrayList;
-    }
-
-    public void setTransportArrayList(ArrayList<Transport> transportArrayList) {
-        this.transportArrayList = transportArrayList;
-    }
 
     public String getBrand() {
         return brand;
@@ -67,6 +62,14 @@ public abstract class Transport<T extends Driver> implements Competing {
         } else {
             this.engineVolume = engineVolume;
         }
+    }
+
+    public List<TechnicalService> getTechnicalServices() {
+        return technicalServices;
+    }
+
+    public void setTechnicalServices(List<TechnicalService> technicalServices) {
+        this.technicalServices = technicalServices;
     }
 
     public abstract void printType();

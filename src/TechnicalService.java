@@ -6,7 +6,7 @@ import java.util.Queue;
 public class TechnicalService<T extends Transport> {
     private String name;
     private String firm;
-    private ArrayList<TechnicalService> technicalServices;
+
     private final Queue<T> queueMaintenance = new LinkedList<>();
     private final Queue<T> queueFixedCar = new LinkedList<>();
 
@@ -48,13 +48,7 @@ public class TechnicalService<T extends Transport> {
         this.name = name;
     }
 
-    public ArrayList<TechnicalService> getTechnicalServices() {
-        return technicalServices;
-    }
 
-    public void setTechnicalServices(ArrayList<TechnicalService> technicalServices) {
-        this.technicalServices = technicalServices;
-    }
 
 
     public void setFirm(String firm) {
