@@ -7,7 +7,7 @@ public abstract class Transport<T extends Driver> implements Competing {
     private Double engineVolume;
     private T driver;
 
-    private Map<HashSet<Transport>,HashSet<TechnicalService>> technicalServices;
+    private Map<Transport,TechnicalService> technicalServices;
 
 
     public Transport(String brand, String model, Double engineVolume, T driver) {
@@ -64,11 +64,11 @@ public abstract class Transport<T extends Driver> implements Competing {
         }
     }
 
-    public Map<HashSet<Transport>, HashSet<TechnicalService>> getTechnicalServices() {
+    public Map<Transport,TechnicalService> getTechnicalServices() {
         return technicalServices;
     }
 
-    public void setTechnicalServices(Map<HashSet<Transport>, HashSet<TechnicalService>> technicalServices) {
+    public void setTechnicalServices(Map<Transport, TechnicalService> technicalServices) {
         this.technicalServices = technicalServices;
     }
 
