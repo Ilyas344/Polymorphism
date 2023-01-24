@@ -1,148 +1,95 @@
-import java.time.LocalDate;
+
 import java.util.Objects;
 
-public class Car extends Transport {
-    private Double engineVolume;
-    private String transmission;
-    private final String bodyType;
-    private  String number;
-    private final Integer seats;
-    private  boolean winterSummer;
-    public class Key{
-        private boolean launch;
-        private boolean keylessAccess;
+public class Car extends Transport<DriverB> {
+    private BodyType bodyType;
 
-        public boolean isLaunch() {
-            return launch;
+    public enum BodyType {
+        SEDAN("Седан"),
+        HATCHBACK("Хетчбек"),
+        COUPE("Купе"),
+        STATION_WAGON("Универсал"),
+        SUV("Внедорожник"),
+        CROSSOVER("Кроссовер"),
+        PICKUP("Пикап"),
+        VAN("Фургон"),
+        MINIVAN("Минивэн");
+        private final String bodyType;
+
+        BodyType(String bodyType) {
+            this.bodyType = bodyType;
         }
 
-        public void setLaunch(boolean launch) {
-            this.launch = launch;
+        public String getBodyType() {
+
+            return bodyType;
         }
 
-        public boolean isKeylessAccess() {
-            return keylessAccess;
-        }
 
-        public void setKeylessAccess(boolean keylessAccess) {
-            this.keylessAccess = keylessAccess;
-        }
-
-        public Key(boolean launch, boolean keylessAccess) {
-            if (launch==true)
-            {this.launch = launch;}
-            if (keylessAccess==true){
-                this.keylessAccess = keylessAccess;}
+        @Override
+        public String toString() {
+            return " тип кузова " + getBodyType();
         }
     }
 
-    public Car(String brand, String model, Double engineVolume, String country, Integer year, String color,
-               String transmission, String bodyType, String number, Integer seats,Integer maxSpeed) {
-        super(brand,model,year,country,color,maxSpeed);
-        setWinterSummer(winterSummer);
-        setEngineVolume(engineVolume);
-        setNumber(number);
 
-        if (seats == null) {
-            this.seats = 1;
+    public Car(String brand, String model, Double engineVolume, DriverB driver, BodyType bodyType) {
+        super(brand, model, engineVolume, driver);
+        this.bodyType = bodyType;
+    }
+
+    public Car(String brand, String model, Double engineVolume, BodyType bodyType) {
+        super(brand, model, engineVolume);
+        this.bodyType = bodyType;
+    }
+
+    @Override
+    public String startMoving() {
+        return null;
+    }
+
+    @Override
+    public String endMoving() {
+        return null;
+    }
+
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(BodyType bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    @Override
+    public void printType() {
+        if (bodyType == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
         } else {
-            this.seats = seats;
+            System.out.println("Легковой автомобиль " + getBrand() + bodyType);
         }
-
-        if (bodyType == null || bodyType.isEmpty()) {
-            this.bodyType = "default";
-        } else {
-            this.bodyType = bodyType;
-        }
-        setTransmission(transmission);
-
-
-
-
 
 
     }
 
     @Override
     public String toString() {
-        String tire;
-        if(winterSummer==true){tire="летняя";}else {tire="зимняя";}
-        return "Автомобиль "+super.toString()+
-                "\nмощность двигателя: " + engineVolume +
-                ", трансмиссия: " + transmission +
-                ", тип кузова: " + bodyType +
-                ", рег. номер: " + number +
-                ", кол-во мест: " + seats +
-                ", резина "+tire+
-                ".\n";
+        return "Автомобиль " + super.toString() + bodyType.toString();
+
     }
-
-
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), engineVolume, transmission, bodyType, number, seats, winterSummer);
+        return Objects.hash(super.hashCode());
     }
 
-    public Double getEngineVolume() {
-
-        return engineVolume;
-    }
-
-    public void setEngineVolume(Double engineVolume ) {
-        if (engineVolume <= 0) {
-            this.engineVolume = 1.5;
+    @Override
+    public void passDiagnostics() throws CheckDriversException {
+        System.out.println("Автомобиль " + getBrand() + " проходит диагностику");
+        if (!getDriver().getIsDriversLicense()) {
+            throw new CheckDriversException("У водителя "+getDriver().getFullName()+" нет прав", this.getDriver());
         } else {
-            this.engineVolume = engineVolume;
+            System.out.println("Водитель " + getDriver().getFullName() + " автомобиля " + getBrand() + " имеет права своей категории");
         }
-    }
-
-
-
-
-
-    public void setTransmission(String transmission) {
-        if (transmission == null || transmission.isEmpty()) {
-            this.transmission = "default";
-        } else {
-            this.transmission = transmission;
-        }
-
-    }
-
-    public void setNumber(String number) {
-        if (this.number == null || this.number.isEmpty()) {
-            this.number = "default";
-        }
-        this.number = number;
-
-    }
-
-    public void setWinterSummer(boolean winterSummer) {
-
-        if (LocalDate.now().getMonthValue()<4&&LocalDate.now().getMonthValue()>10)
-        {this.winterSummer = true;}
-        else {this.winterSummer = false;}
-    }
-
-
-    public String getTransmission() {
-        return transmission;
-    }
-
-    public String getBodyType() {
-        return bodyType;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public Integer getSeats() {
-        return seats;
-    }
-
-    public boolean isWinterSummer() {
-        return winterSummer;
     }
 }

@@ -1,45 +1,48 @@
-import java.util.Objects;
+import java.util.*;
 
-public abstract class  Transport {
+public abstract class Transport<T extends Driver> implements Competing {
 
     private final String brand;
     private final String model;
-    private final Integer year;
-    private final String country;
-    private String color;
-    private Integer maxSpeed;
+    private Double engineVolume;
+    private T driver;
 
-    public Transport(String brand, String model, Integer year, String country, String color, Integer maxSpeed) {
+    private Map<Transport,TechnicalService> technicalServices;
+
+
+    public Transport(String brand, String model, Double engineVolume, T driver) {
         if (brand == null || brand.isEmpty()) {
             this.brand = "default brand";
         } else {
             this.brand = brand;
+            technicalServices=  new HashMap<>();
         }
+
 
         if (model == null || model.isEmpty()) {
             this.model = "default model";
         } else {
             this.model = model;
         }
+        setEngineVolume(engineVolume);
+        setDriver(driver);
 
-        this.year = Math.abs(year);
-        if (country == null || country.isEmpty()) {
-            this.country = "default country";
-        } else {
-            this.country = country;
-        }
-
-        if (color == null || color.isEmpty()) {
-            this.color = "default color";
-        }
-        this.color = color;
-
-        if (maxSpeed == 0) {
-            this.maxSpeed = 1;
-        } else {
-            this.maxSpeed = maxSpeed;
-        }
     }
+
+    public Transport(String brand, String model, Double engineVolume) {
+        this.brand = brand;
+        this.model = model;
+        this.engineVolume = engineVolume;
+    }
+
+    public T getDriver() {
+        return driver;
+    }
+
+    public void setDriver(T driver) {
+        this.driver = driver;
+    }
+
 
     public String getBrand() {
         return brand;
@@ -49,61 +52,69 @@ public abstract class  Transport {
         return model;
     }
 
-    public Integer getYear() {
-        return year;
+    public Double getEngineVolume() {
+        return engineVolume;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public Integer getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void  setColor(String color) {
-        {
-            if (color == null || color.isEmpty()) {
-                this.color = "без цвета";
-            } else {
-                this.color = color;
-            }
-        }
-    }
-
-    public void setMaxSpeed(Integer maxSpeed) {
-        if (maxSpeed == 0) {
-            this.maxSpeed = 1;
+    public void setEngineVolume(Double engineVolume) {
+        if (engineVolume <= 0) {
+            this.engineVolume = 1.5;
         } else {
-            this.maxSpeed = Math.abs(maxSpeed);
+            this.engineVolume = engineVolume;
         }
     }
 
+    public Map<Transport,TechnicalService> getTechnicalServices() {
+        return technicalServices;
+    }
+
+    public void setTechnicalServices(Map<Transport, TechnicalService> technicalServices) {
+        this.technicalServices = technicalServices;
+    }
+
+    public abstract void printType();
 
 
     @Override
     public String toString() {
         return ": " + brand + " " + model +
-                ",год выпуска: " + year +
-                ", страна производства: " + country +
-                ", цвет: " + color +
-                ", максимальная скорость: " + maxSpeed;
+                ", мощность двигателя " + engineVolume;
     }
+
+    public abstract String startMoving();
+
+    public abstract String endMoving();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transport transport = (Transport) o;
-        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(year, transport.year) && Objects.equals(country, transport.country) && Objects.equals(color, transport.color) && Objects.equals(maxSpeed, transport.maxSpeed);
+        return Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model) && Objects.equals(engineVolume, transport.engineVolume);
     }
+
+    public abstract void passDiagnostics() throws CheckDriversException;
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model, year, country, color, maxSpeed);
+        return Objects.hash(brand, model, engineVolume);
     }
+
+    @Override
+    public void getPitStop() {
+        System.out.println("Пит стоп для " + getBrand() + " " + getModel());
+    }
+
+    @Override
+    public Double getBestLapTime() {
+        return (getMaxSpeed() * 1000);
+    }
+
+    @Override
+    public Double getMaxSpeed() {
+        return getEngineVolume() * 50;
+    }
+
+
 }
