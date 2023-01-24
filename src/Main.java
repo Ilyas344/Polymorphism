@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         DriverB driverB = new DriverB("Александр", false, 5);
@@ -38,7 +41,7 @@ public class Main {
         paz.getPitStop();
         System.out.println("Лучшее время курга для " + volvo.getBrand() + " " + volvo.getModel() + " " + volvo.getBestLapTime());
         System.out.println("Максимальная скорость " + volvo.getMaxSpeed());*/
-        TechnicalService mech = new TechnicalService<>("Иванов Иван", "Механие");
+        //  TechnicalService mech = new TechnicalService<>("Иванов Иван", "Механие");
         /* volvo.getPitStop();
         printInfo(paz);
         printInfo(volvo);
@@ -52,7 +55,7 @@ public class Main {
         liaz3.printType();
         volvo3.printType();
         audi.printType();*/
-        try {
+     /*   try {
             volvo.passDiagnostics();
             audi.passDiagnostics();
             paz.passDiagnostics();
@@ -60,7 +63,7 @@ public class Main {
         } catch (CheckDriversException e) {
             System.out.println("Произошла ошибка");
             System.out.println(e.getMessage());
-        }
+        }*/
 
     /*    mech.addFixedCar(paz);
         mech.addFixedCar(maz);
@@ -70,10 +73,29 @@ public class Main {
         mech.addFixedCar(volvo2);
         mech.fixedCar();
 */
+        HashSet<Driver> drivers = new HashSet<>();
+        drivers.add(driverB);
+        drivers.add(driverB);
+        drivers.add(driverC);
+        drivers.add(driverD);
+        Iterator itr1 = drivers.iterator();
+        while (itr1.hasNext()) {
+            System.out.println(itr1.next());
+        }
+        System.out.println();
+        for (Iterator itr2 = drivers.iterator(); itr2.hasNext(); ) {
+            String word = itr2.next().toString();
+            System.out.print(word + "\n");
+
+        }
 
     }
 
+
+
+
+/*
     private static void printInfo(Transport<?> transport) {
         System.out.println("Водитель " + transport.getDriver().getFullName() + " управляет автомобилем " + transport.getBrand() + " и будет участвовать в гонке");
-    }
+    }*/
 }
